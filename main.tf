@@ -14,7 +14,8 @@ resource "aws_vpc" "cyber-vpc" {
 resource "aws_security_group" "allow-all" {
    name =     "allow_all"
    description = "Allow all SSH test"
-   vpc_id = "${aws_vpc.main.id}"
+#   vpc_id = "${aws_vpc.main.id}"
+   vpc_id = "default"
 
    ingress {
       from_port = 22
