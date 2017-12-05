@@ -1,0 +1,23 @@
+import "tfplan"
+
+check_ingress_inline = rule {
+	all tfplan.resources.aws_security_group as _, instances {
+		all instances as _, sg {
+			all sg.applied.ingress as ingress {
+				ingress.cidr_blocks not contains "0.0.0.0/0"
+			}
+		}
+	}
+}
+
+check_ingress_rules = rule {
+	all tfplan.resources.aws_security_group_rule as _, instances {
+		all instances as _, r {
+			(r.applied.type is "ingress" and r.applied.cidr_blocks not contains "0.0.0.0/0") or r.applied.type is not "ingress"
+		}
+	}
+}
+
+main = rule {
+ 	check_ingress_inline and check_ingress_rules
+}
