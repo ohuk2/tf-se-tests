@@ -22,5 +22,4 @@ resource "aws_security_group" "allow-all" {
       protocol = "tcp"
       cidr_blocks = ["0.0.0.0/0"]
    }
-
 }
