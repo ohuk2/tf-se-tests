@@ -11,7 +11,6 @@ resource "aws_vpc" "cyber-vpc" {
    cidr_block = "10.1.1.0/24"
 }
 
-
 resource "aws_security_group" "allow-all" {
    name =     "allow_all"
    description = "Allow all SSH test"
